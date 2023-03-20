@@ -1,6 +1,6 @@
-use std::collections::HashSet;
-
 use crate::REQUIRED_LETTERS_COUNT;
+use log::debug;
+use std::collections::HashSet;
 
 pub struct Input {
     pub required: char,
@@ -12,7 +12,7 @@ impl TryFrom<&str> for Input {
 
     fn try_from(line: &str) -> Result<Self, Self::Error> {
         let parts: Vec<char> = line.trim().chars().collect();
-        println!("Parts {:?}", parts);
+        debug!("Parts {:?}", parts);
 
         if parts.len() != REQUIRED_LETTERS_COUNT {
             return Err("Invalid input. Please enter 7 letters.");
