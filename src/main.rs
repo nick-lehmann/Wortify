@@ -10,9 +10,13 @@ fn main() {
     let input = Input::try_from(line.as_str()).unwrap();
     let dataset = get_word_dataset();
 
-    let solutions = solve(&input, &dataset);
-    println!("Found {:?} solutions.", solutions.len());
-    for solution in &solutions {
-        println!("- {}", solution.0);
+    let solution = solve(&input, &dataset);
+    println!(
+        "Found {:?} solutions for total of {:?} points.",
+        solution.words.len(),
+        solution.points
+    );
+    for word in solution.words {
+        println!("- {}", *word);
     }
 }

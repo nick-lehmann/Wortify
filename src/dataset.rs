@@ -1,12 +1,15 @@
 use crate::word::Word;
 use log::debug;
-use std::fs::{self, read_to_string};
+use std::{
+    collections::HashSet,
+    fs::{self, read_to_string},
+};
 
 static DATASET_URL: &'static str = "https://6mal5.com/wortify/data/words.csv?3";
 static APP_NAME: &'static str = "wortify";
 static DATASET_FILENAME: &'static str = "words.csv";
 
-pub type Dataset = Vec<Word>;
+pub type Dataset = HashSet<Word>;
 
 /// Returns the dataset of all words recognised by Wortify.
 ///
@@ -37,7 +40,7 @@ pub fn get_word_dataset() -> Dataset {
 }
 
 /// Converts the raw `.csv` file into a dataset.
-fn convert_to_dataset(raw: String) -> Dataset {
+pub(crate) fn convert_to_dataset(raw: String) -> Dataset {
     raw.lines().map(|line| Word::from(line)).collect()
 }
 
