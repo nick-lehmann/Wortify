@@ -15,7 +15,7 @@ pub struct Solution<'a> {
 }
 
 pub fn solve<'a>(input: &Input, dataset: &'a Dataset) -> Solution<'a> {
-    let words: Vec<&'a Word> = dataset
+    let mut words: Vec<&'a Word> = dataset
         .iter()
         .filter_map(|word| {
             if is_solution(input, word) {
@@ -25,6 +25,8 @@ pub fn solve<'a>(input: &Input, dataset: &'a Dataset) -> Solution<'a> {
             }
         })
         .collect();
+
+    words.sort_by(|a,b| a.cmp(b));
 
     let points: u64 = words.iter().map(|word| points(&word)).sum();
 
